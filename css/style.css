@@ -1,0 +1,46 @@
+body{
+	margin: 0px;
+}
+
+
+.arrow{
+	background-image: url("../images/arrow.png");
+  background-color: black;
+  height: 50px;
+      width: 50px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  	position: absolute;
+}
+
+.up{
+	left: 50%;
+    top: 10%;
+    transform: translate(-50%,-50%);
+}
+
+.right{
+    left: 90%;
+    top: 50%;
+    transform: translate(-50%,-50%) rotate(90deg);
+}
+
+.down{
+left: 50%;
+    top: 90%;
+    transform: translate(-50%,-50%) rotate(180deg);
+}
+
+.left{
+left: 10%;
+    top: 50%;
+    transform: translate(-50%,-50%) rotate(270deg);
+}
+
+.winner{
+left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    position: absolute;
+}
