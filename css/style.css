@@ -1,6 +1,8 @@
-body{
+*{
 	margin: 0px;
+	padding: 0px;
 }
+
 
 
 .arrow{
@@ -43,4 +45,20 @@ left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
     position: absolute;
+}
+
+.back{
+	position: absolute;
+    right: 5vw;
+    top: 5vw;
+}
+
+.button {
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    display: table;
+    margin-bottom: 10px;
+    font-size: 20px;
 }
