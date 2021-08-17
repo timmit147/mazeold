@@ -190,68 +190,158 @@ if(game == "maze4"){
 
 
 
+// function maze(maze){
+
+// 	var x = 1;
+// 	var y = 1;
+
+// 	map = maze;
+
+	// up = document.querySelector(".up");
+	// right = document.querySelector(".right");
+	// down = document.querySelector(".down");
+	// left = document.querySelector(".left");
+	// winner = document.querySelector(".winner");
+
+	// up.addEventListener("click", function() {
+	// 	  x =  x - 1;
+	// 	  xy();
+	// });
+
+	// left.addEventListener("click", function() {
+	// 	  y =  y - 1;
+	// 	  xy();
+
+	// });
+
+	// down.addEventListener("click", function() {
+	// 	  x =  x + 1;
+	// 	  xy();
+	// });
+
+	// right.addEventListener("click", function() {
+	// 	  y =  y + 1;
+	// 	  xy();
+	// });
+
+	// function xy(){
+	// 	console.log(x+"."+y);
+	// 	// console.log(map[x+"."+y]);
+
+	// 	up.style.visibility = "hidden";
+	// 	right.style.visibility = "hidden";
+	// 	down.style.visibility = "hidden";
+	// 	left.style.visibility = "hidden";
+	// 	winner.style.visibility = "hidden";
+
+	// 	if(map[x+"."+y].includes("u") ){
+	// 		up.style.visibility = "visible";
+	// 	}
+	// 	if(map[x+"."+y].includes("l") ){
+	// 		left.style.visibility = "visible";
+	// 	}
+	// 	if(map[x+"."+y].includes("d") ){
+	// 		down.style.visibility = "visible";
+	// 	}
+	// 	if(map[x+"."+y].includes("r") ){
+	// 		right.style.visibility = "visible";
+	// 	}
+	// 	if(map[x+"."+y].includes("x") ){
+	// 		console.log("you won");
+	// 		winner.style.visibility = "visible";
+	// 	}
+	// }
+
+	// xy();
+
+// }
+
+
 function maze(maze){
+
+	let touchstartX = 0;
+	let touchstartY = 0;
+	let touchendX = 0;
+	let touchendY = 0;
 
 	var x = 1;
 	var y = 1;
-
 	map = maze;
 
-	up = document.querySelector(".up");
-	right = document.querySelector(".right");
-	down = document.querySelector(".down");
-	left = document.querySelector(".left");
-	winner = document.querySelector(".winner");
+	const gestureZone = document.querySelector('body');
 
-	up.addEventListener("click", function() {
-		  x =  x - 1;
-		  xy();
-	});
+	gestureZone.addEventListener('touchstart', function(event) {
+	    touchstartX = event.changedTouches[0].screenX;
+	    touchstartY = event.changedTouches[0].screenY;
+	}, false);
 
-	left.addEventListener("click", function() {
-		  y =  y - 1;
-		  xy();
+	gestureZone.addEventListener('touchend', function(event) {
+	    touchendX = event.changedTouches[0].screenX;
+	    touchendY = event.changedTouches[0].screenY;
+	    handleGesture();
+	}, false); 
 
-	});
+	function handleGesture() {
+	    if (touchendX + 100 <= touchstartX && map[x+"."+y].includes("l")) {
+	        console.log('left');
+	        y =  y - 1;
+			 xy();
+	    }
+	    
+	    if (touchendX >= touchstartX + 100 && map[x+"."+y].includes("r")) {
+	        console.log('right');
+	        y =  y + 1;
+			  xy();
+	    }
+	    
+	    if (touchendY + 100 <= touchstartY && map[x+"."+y].includes("u")) {
+	        console.log('up');
+	        x =  x - 1;
+			xy();
+	    }
+	    
+	    if (touchendY >= touchstartY + 100 && map[x+"."+y].includes("d")) {
+	        console.log('down');
+			x =  x + 1;
+			  xy();
+	    }
+	    
+	}
 
-	down.addEventListener("click", function() {
-		  x =  x + 1;
-		  xy();
-	});
-
-	right.addEventListener("click", function() {
-		  y =  y + 1;
-		  xy();
-	});
+	box = document.querySelector(".box");
 
 	function xy(){
 		console.log(x+"."+y);
-		// console.log(map[x+"."+y]);
-
-		up.style.visibility = "hidden";
-		right.style.visibility = "hidden";
-		down.style.visibility = "hidden";
-		left.style.visibility = "hidden";
-		winner.style.visibility = "hidden";
-
 		if(map[x+"."+y].includes("u") ){
-			up.style.visibility = "visible";
+			box.style.borderTop = "0px solid black";
+		}
+		else{
+			box.style.borderTop = "3px solid black";
 		}
 		if(map[x+"."+y].includes("l") ){
-			left.style.visibility = "visible";
+			box.style.borderLeft = "0px solid black";
+		}
+		else{
+			box.style.borderLeft = "3px solid black";
 		}
 		if(map[x+"."+y].includes("d") ){
-			down.style.visibility = "visible";
+			box.style.borderBottom = "0px solid black";
+		}
+		else{
+			box.style.borderBottom = "3px solid black";
 		}
 		if(map[x+"."+y].includes("r") ){
-			right.style.visibility = "visible";
+			box.style.borderRight = "0px solid black";
+		}
+		else{
+			box.style.borderRight = "3px solid black";
 		}
 		if(map[x+"."+y].includes("x") ){
 			console.log("you won");
-			winner.style.visibility = "visible";
+			document.querySelector(".winner").style.visibility = "visible";
 		}
 	}
 
 	xy();
 
-}
+}	
